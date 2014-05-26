@@ -4,12 +4,55 @@
 '''
 
 xmldata = """<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#ff314859"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp" >
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Demo"
+        android:textSize="32dp"
+        android:gravity="center"
+        />
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/weather" 
+        android:text="Time"
+        />
+
+</RelativeLayout>"""
+
+
+other = '''
+
+am start -a com.googlecode.android_scripting.action.LAUNCH_SERVER -n com.googlecode.android_scripting/.activity.ScriptingLayerServiceLauncher --ez com.googlecode.android_scripting.extra.USE_PUBLIC_IP true --ei com.googlecode.android_scripting.extra.USE_SERVICE_PORT 5500
+# am start -a com.googlecode.android_scripting.action.LAUNCH_SERVER -n com.googlecode.android_scripting/.activity.ScriptingLayerServiceLauncher --ei com.googlecode.android_scripting.extra.USE_SERVICE_PORT 45001
+
+
+    <TextView
+        android:id="@+id/weather"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name"
+        android:layout_toRightOf="@+id/time" 
+        android:text="Weather"
+        />
+    <TextView
+        android:id="@+id/network"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name"
+        android:layout_toRightOf="@+id/weather" 
+        android:layout_alignParentRight="true"
+        android:text="Network"
+        />
     <TextView
             android:layout_width="fill_parent"
             android:layout_height="0px"
@@ -48,9 +91,11 @@ xmldata = """<?xml version="1.0" encoding="utf-8"?>
             android:textSize="14dp"
             android:id="@+id/but_exit" 
             android:gravity="center"/>
-
     </LinearLayout>
-</LinearLayout>"""
+
+
+
+'''
 
 import android, random
 from fullscreenwrapper2 import *
@@ -61,8 +106,8 @@ class DemoLayout(Layout):
         
     def on_show(self):
         self.add_event(key_EventHandler(handler_function=self.close_app))
-        self.views.but_change.add_event(click_EventHandler(self.views.but_change, self.change_color))
-        self.views.but_exit.add_event(click_EventHandler(self.views.but_exit, self.close_app))
+        # self.views.but_change.add_event(click_EventHandler(self.views.but_change, self.change_color))
+        # self.views.but_exit.add_event(click_EventHandler(self.views.but_exit, self.close_app))
         
     def on_close(self):
         pass
@@ -72,7 +117,7 @@ class DemoLayout(Layout):
 
     def change_color(self,view, event):
         colorvalue = "#ff"+self.get_rand_hex_byte()+self.get_rand_hex_byte()+self.get_rand_hex_byte()
-        self.views.txt_colorbox.background=colorvalue
+        # self.views.txt_colorbox.background=colorvalue
     
     def get_rand_hex_byte(self):
         j = random.randint(0,255)
@@ -84,6 +129,14 @@ class DemoLayout(Layout):
 if __name__ == '__main__':
     droid = android.Android()
     random.seed()
-    FullScreenWrapper2App.initialize(droid)
-    FullScreenWrapper2App.show_layout(DemoLayout())
-    FullScreenWrapper2App.eventloop()
+    try:
+    # if True:
+        FullScreenWrapper2App.initialize(droid)
+        FullScreenWrapper2App.show_layout(DemoLayout())
+        FullScreenWrapper2App.eventloop()
+    except KeyboardInterrupt:
+        print 'Done'
+    except:
+        raise
+    finally:
+        FullScreenWrapper2App.exit_FullScreenWrapper2App()
