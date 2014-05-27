@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-GB">
+<head>
+  <title>fascia: Dashboard v1</title>
+  
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+  <!-- <link rel="stylesheet" href="//raw.githubusercontent.com/erikflowers/weather-icons/master/css/weather-icons.min.css"> -->
+  <link rel="stylesheet" href="/static/weather/weather-icons.css">
+  <link rel="stylesheet" href='/static/base.css'>
+</head>
+
+<body>
+
+<div id="header">
+  {% block header %}{% end %}
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-3">
+            <h1><i class="wi-day-lightning"></i></h1>
+            <p>AnalogTime</p>
+        </div>
+        <div class="col-xs-9">Time and Date</div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6">Weather</div>
+        <div class="col-xs-6">Network</div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">Calendar</div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">Rescuetime</div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">Music</div>
+    </div>
+
+</div>
+
+
+<div id="content">
+  {% block content %}{% end %}
+</div>
+
+<div id="footer">
+  {% block footer %}{% end %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  
+</div>
+
+</body>
+</html>

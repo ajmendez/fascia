@@ -1,0 +1,8 @@
+body {
+    background-color:#000;
+    color:#fff;
+    margin:20px;
+}
+div {
+    outline:#fff solid thin;
+}

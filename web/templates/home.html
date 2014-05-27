@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block header %}
+  <h1>{{ time }}</h1>
+{% end %}
+
+{% block content %}
+    <hr />
+  <p class="lead"> Hello World</p>
+<ul>
+ {% for item in items %}
+     <li>{{ item }}</li>
+ {% end %}
+</ul>
+{% end %}
+
+{% block footer %}
+  <small>Footer</small>
+{% end %}
