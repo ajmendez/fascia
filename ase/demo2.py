@@ -7,6 +7,7 @@ xmldata = """<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="#66000000"
     android:paddingLeft="16dp"
     android:paddingRight="16dp" >
     <TextView
@@ -26,14 +27,15 @@ xmldata = """<?xml version="1.0" encoding="utf-8"?>
         android:layout_toLeftOf="@+id/weather" 
         android:text="Time"
         />
-
+    <WebView
+            android:id="@+id/web" 
+            android:layout_width="400dp"
+            android:layout_height="400dp"
+            />
 </RelativeLayout>"""
 
 
 other = '''
-
-am start -a com.googlecode.android_scripting.action.LAUNCH_SERVER -n com.googlecode.android_scripting/.activity.ScriptingLayerServiceLauncher --ez com.googlecode.android_scripting.extra.USE_PUBLIC_IP true --ei com.googlecode.android_scripting.extra.USE_SERVICE_PORT 5500
-# am start -a com.googlecode.android_scripting.action.LAUNCH_SERVER -n com.googlecode.android_scripting/.activity.ScriptingLayerServiceLauncher --ei com.googlecode.android_scripting.extra.USE_SERVICE_PORT 45001
 
 
     <TextView
@@ -101,11 +103,27 @@ import android, random
 from fullscreenwrapper2 import *
 
 class DemoLayout(Layout):
-    def __init__(self):
+    def __init__(self, droid):
+        self.droid = droid
         super(DemoLayout,self).__init__(xmldata,"FullScreenWrapper Demo")
         
     def on_show(self):
         self.add_event(key_EventHandler(handler_function=self.close_app))
+        # add image 
+        
+        # Works
+        # self.droid.fullSetProperty("image","src",
+        #                            "@android:drawable/star_big_off")
+        # fails 
+        # self.droid.fullSetProperty("image","src",
+        #                            "http://i.imgur.com/JwvgFcx.gif") 
+
+        #
+        # self.droid.fullSetProperty("web","src",
+        #                            "file:///sdcard/Pictures/JwvgFcx.gif") 
+        
+        
+        
         # self.views.but_change.add_event(click_EventHandler(self.views.but_change, self.change_color))
         # self.views.but_exit.add_event(click_EventHandler(self.views.but_exit, self.close_app))
         
@@ -132,7 +150,7 @@ if __name__ == '__main__':
     try:
     # if True:
         FullScreenWrapper2App.initialize(droid)
-        FullScreenWrapper2App.show_layout(DemoLayout())
+        FullScreenWrapper2App.show_layout(DemoLayout(droid))
         FullScreenWrapper2App.eventloop()
     except KeyboardInterrupt:
         print 'Done'
