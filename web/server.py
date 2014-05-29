@@ -3,13 +3,18 @@
 '''
 import os
 import sys
-import tornado.ioloop
 import tornado.web
+import tornado.ioloop
+import weather
 from datetime import datetime
+
 
 HOSTNAME = 'localhost'
 PORT = 5555
 
+
+w = weather.Weather()
+w.update()
 
 
 
@@ -18,7 +23,10 @@ class MainHandler(tornado.web.RequestHandler):
     def get(self):
         items = ['a','b']
         time = datetime.now()
-        self.render('home.html', items=items, time=time)
+        weather = w.display()
+        # weather['icon'] = ICONMAP[weather['icon']]
+        self.render('home.html', items=items, time=time,
+                                 weather=weather)
         # self.write("Hello, world")
         # print 'client'
         sys.stdout.write('.')

@@ -1,8 +1,42 @@
 {% extends "base.html" %}
 
 {% block header %}
-  <h1>{{ time }}</h1>
+
 {% end %}
+
+
+
+{% block time %}
+<div class="text-center">
+  <h1 class="lead">{{ time.hour }}:{{ '%02d'%time.minute }}:{{ '%02d'%time.second }}</h1>
+  <small>{{ time.strftime("%a") }}, {{ time.strftime("%B") }} {{ time.day }}</small>
+</div>
+{% end %}
+
+
+
+
+{% block weather %}
+  <div class="col-xs-1">
+    {{ int(weather['temp']) }}F: {{ weather['description'].capitalize() }} <br />
+    <h1><i class="{{ weather['icon'] }}"></i></h1>
+     <br />
+    <small>[{{ int(weather['min']) }}/{{ int(weather['max']) }}]</small>
+    <!-- Current: {{ weather['date'] }} -->
+  </div>
+  {% for day in weather['forecast'] %}
+    {% block day %}
+    <div class="col-xs-1"> 
+      {{ day['date'].strftime("%b") }} {{ day['date'].day }} <br />
+      <h1><i class="{{ day['icon'] }}"></i></h1>
+      {{ int(day['temp']) }} <br />
+      <small>{{ int(day['min']) }} | {{ int(day['max']) }} </small>
+    </div>
+    {% end %}
+  {% end %}
+{% end %}
+
+
 
 {% block content %}
     <hr />

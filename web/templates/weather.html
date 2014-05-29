@@ -1,0 +1,11 @@
+### Weather template 
+
+### Current Day
+
+
+### Forcast
+{% for day in forcast %}
+  {% block day %}
+    <p>Day: {{ escape(day['date']) }}</p>
+  {% day %}
+{% end %}

@@ -21,18 +21,23 @@
 </div>
 
 <div class="container-fluid">
+    
+    <div class='col-centered' style='margin: auto; max-width: 200px'>
     <div class="row">
-        <div class="col-xs-3">
-            <h1><i class="wi-day-lightning"></i></h1>
-            <p>AnalogTime</p>
-        </div>
-        <div class="col-xs-9">Time and Date</div>
+            <div class="col-xs-12">{% block time %}{% end %}</div>
+      </div>
     </div>
 
     <div class="row">
-        <div class="col-xs-6">Weather</div>
+        {% block weather %}{% end %}
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6">Small Calendar</div>
         <div class="col-xs-6">Network</div>
     </div>
+
+
 
     <div class="row">
         <div class="col-xs-12">Calendar</div>
