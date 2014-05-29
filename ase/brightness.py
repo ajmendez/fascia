@@ -1,5 +1,6 @@
 
 import sys
+import time
 try:
     import androidhelper as android
 except:
@@ -7,11 +8,11 @@ except:
 
 def brightness(droid, value):
     droid.makeToast("Changing Brightness!") 
-    # droid.wakeLockAcquireFull()
+    droid.wakeLockAcquireBright()
     # droid.notify('test','message')
     if not droid.checkScreenOn().result:
         print 'Turning on screen'
-        print droid.wakeLockAcquireFull()
+        # print droid.wakeLockAcquireFull()
         # droid.wakeLockAcquireDim()
         # droid.setScreenState(1)
     else:
@@ -22,6 +23,10 @@ def brightness(droid, value):
     print 'Set brightness: % 3d' % value
     droid.setScreenBrightness(value)
 
+    for i in range(10):
+      sys.stdout.write('.')
+      sys.stdout.flush()
+      time.sleep(1)
     print droid.wakeLockRelease()
 
 if __name__ == '__main__':
