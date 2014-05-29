@@ -12,7 +12,7 @@ from datetime import datetime
 HOSTNAME = 'localhost'
 PORT = 5555
 
-
+# TODO: create a scheduler to run updates at specific times
 w = weather.Weather()
 w.update()
 
@@ -23,12 +23,8 @@ class MainHandler(tornado.web.RequestHandler):
     def get(self):
         items = ['a','b']
         time = datetime.now()
-        weather = w.display()
-        # weather['icon'] = ICONMAP[weather['icon']]
         self.render('home.html', items=items, time=time,
-                                 weather=weather)
-        # self.write("Hello, world")
-        # print 'client'
+                                 weather=w.display())
         sys.stdout.write('.')
         sys.stdout.flush()
 

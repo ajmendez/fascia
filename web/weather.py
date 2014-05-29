@@ -8,30 +8,6 @@ from pymendez.auth import auth
 
 KEY = auth('openweathermap', 'ident')
 LOCATION = 'San Diego, CA'
-# CURRENT = 'http://api.openweathermap.org/data/2.5/weather'
-# FORCAST = 'http://api.openweathermap.org/data/2.5/forecast/daily'
-
-# UNITS = 'english' # metric
-
-# def current(location=LOCATION):
-#   '''get the current weather'''
-#   params = dict(
-#     q=location,
-#   )
-#   r = requests.get(CURRENT, params=params)
-#   return r.json()
-#   
-# 
-# def forcast(location=LOCATION, days=7):
-#   '''Get the 7 day forcast'''
-#   params = dict(
-#     q=location,
-#     units=UNITS,
-#     cnt=days,
-#   )
-#   r = requests.get(FORCAST, params=params)
-#   return r.json()
-
 
 ICONMAP = {
   '01d':'wi-day-sunny',
@@ -66,7 +42,8 @@ class Weather(object):
     '''Get the data from the server'''
     loc = self.owm.weather_at(LOCATION)
     current = loc.get_weather()
-    forecast = self.owm.daily_forecast(LOCATION, limit=5).get_forecast().get_weathers()
+    fc = self.owm.daily_forecast(LOCATION, limit=5)
+    forecast = fc.get_forecast().get_weathers()
     
     # parse the forecast
     self.data = self.parse(current)
@@ -98,27 +75,3 @@ class Weather(object):
       sunset      = dateutil.parser.parse(w.get_sunset_time('iso')),
     )
     return data
-
-# {"coord":{"lon":-117.16,"lat":32.72},
-#  "sys":{"message":0.0192,
-#         "country":"United States of America",
-#         "sunrise":1401367331,
-#         "sunset":1401418207},
-#  "weather":[{"id":803,
-#              "main":"Clouds",
-#              "description":"broken clouds",
-#              "icon":"04n"}],
-# "base":"cmc stations",
-# "main":{"temp":290.26,
-#         "pressure":1013,
-#         "humidity":82,
-#         "temp_min":288.71,
-#         "temp_max":292.15},
-# "wind":{"speed":1.62,
-#         "deg":173.501},
-# "clouds":{"all":75},
-# "dt":1401343740,
-# "id":5391811,
-# "name":"San Diego",
-# "cod":200}
-    
