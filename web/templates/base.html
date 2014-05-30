@@ -37,7 +37,9 @@
         <div class="col-xs-6">Network</div>
     </div>
 
-
+    <div class="row">
+        {% block reddit %}{% end %}
+    </div>
 
     <div class="row">
         <div class="col-xs-12">Calendar</div>
@@ -62,7 +64,8 @@
   {% block footer %}{% end %}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-  
+  <script scr="/static/moment.js"></script>
+  <script scr="/static/base.js"></script>
 </div>
 
 </body>

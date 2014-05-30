@@ -6,6 +6,7 @@ import sys
 import tornado.web
 import tornado.ioloop
 import weather
+import reddit
 from datetime import datetime
 
 
@@ -13,10 +14,11 @@ HOSTNAME = 'localhost'
 PORT = 5555
 
 # TODO: create a scheduler to run updates at specific times
-w = weather.Weather()
-w.update()
+# w = weather.Weather()
+# w.update()
 
-
+r = reddit.Reddit()
+r.load()
 
 class MainHandler(tornado.web.RequestHandler):
     '''Handles the web requests'''
@@ -24,7 +26,9 @@ class MainHandler(tornado.web.RequestHandler):
         items = ['a','b']
         time = datetime.now()
         self.render('home.html', items=items, time=time,
-                                 weather=w.display())
+                                 # weather=w.display(),
+                                 weather=None,
+                                 reddit=r.display())
         sys.stdout.write('.')
         sys.stdout.flush()
 
