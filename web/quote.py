@@ -10,7 +10,15 @@ May 2014 : Mendez
 class Quote(object):
     def __init__(self):
         pass
-
+    
+    def update(self):
+        '''Get quote from fortune?  internet fortune database? motivational quotes?'''
+        # get the quote
+        # add it to previous quote list for archive
+        
+    
+    def display(self):
+        '''Render quote'''
 
 
 
