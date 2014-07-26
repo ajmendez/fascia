@@ -14,8 +14,8 @@ HOSTNAME = 'localhost'
 PORT = 5555
 
 # TODO: create a scheduler to run updates at specific times
-# w = weather.Weather()
-# w.update()
+w = weather.Weather()
+w.update()
 
 r = reddit.Reddit()
 r.load()
@@ -26,16 +26,16 @@ class MainHandler(tornado.web.RequestHandler):
         items = ['a','b']
         time = datetime.now()
         self.render('home.html', items=items, time=time,
-                                 # weather=w.display(),
-                                 weather=None,
+                                 weather=w.display(),
+                                 # weather=None,
                                  reddit=r.display())
         sys.stdout.write('.')
         sys.stdout.flush()
-
+        
 
 def server(hostname, port):
     '''Setup the server on this port'''
-    print 'Starting the Server!'
+    print 'Starting the Server: http://{}:{}'.format(hostname,port)
     try:
         mainpath = os.path.dirname(__file__)
         settings = dict(
